@@ -13,6 +13,8 @@ from data import CIFAR10Data
 from module import CIFAR10Module
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
+from modifymodel import modify_vgg19
+
 def main(args):
 
     if bool(args.download_weights):
@@ -45,6 +47,9 @@ def main(args):
                 "cifar10_models", "state_dicts", args.classifier + ".pt"
             )
             model.model.load_state_dict(torch.load(state_dict))
+            
+            if args.model_modify== 1:
+                self.model = modify_vgg19(self.model)
 
         if bool(args.test_phase):
             trainer.test(model, dataloaders=data.test_dataloader())
