@@ -90,6 +90,8 @@ if __name__ == "__main__":
     parser.add_argument("--weight_decay", type=float, default=1e-4)
     parser.add_argument("--scheduler_step_size", type=int, default=50)
     parser.add_argument("--scheduler_gamma", type=float, default=0.1)
+    parser.add_argument("--model_modify", type=int, default=0, choices=[0, 1])
+    
 
     args = parser.parse_args()
     main(args)
