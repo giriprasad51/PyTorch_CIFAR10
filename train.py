@@ -49,7 +49,7 @@ def main(args):
             model.model.load_state_dict(torch.load(state_dict))
             
             if args.model_modify== 1:
-                self.model = modify_vgg19(self.model)
+                model.model = modify_vgg19(model.model)
 
         if bool(args.test_phase):
             trainer.test(model, dataloaders=data.test_dataloader())
