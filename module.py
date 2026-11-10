@@ -19,7 +19,7 @@ import pytorch_lightning as pl
 
 # from vgg import vgg11_bn, vgg13_bn, vgg16_bn, vgg19_bn
 from cifar10_models.vgg import vgg11_bn, vgg13_bn, vgg16_bn, vgg19_bn
-from modifymodel import modify_vgg19
+
 
 all_classifiers = {
     "vgg11_bn": vgg11_bn(),
@@ -51,8 +51,7 @@ class CIFAR10Module(pl.LightningModule):
             self.model = vgg16_bn(pretrained=False, progress=True, device=self.device)
         elif hparams.classifier == "vgg19_bn":
             self.model = vgg19_bn(pretrained=False, progress=True, device=self.device)
-            if hparams.model_modify== 1:
-                self.model = modify_vgg19(self.model)
+            
         else:
             raise ValueError("Invalid classifier name.")
 
