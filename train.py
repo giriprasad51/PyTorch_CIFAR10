@@ -47,6 +47,7 @@ def main(args):
                 "cifar10_models", "state_dicts", args.classifier + ".pt"
             )
             model.model.load_state_dict(torch.load(state_dict))
+            model.model.to("cuda:0")
             
             if args.model_modify== 1:
                 model.model = modify_vgg19(model.model)
