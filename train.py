@@ -43,9 +43,14 @@ def main(args):
         data = CIFAR10Data(args)
 
         if bool(args.pretrained):
-            state_dict = os.path.join(
-                "cifar10_models", "state_dicts", args.classifier + ".pt"
-            )
+            if args.checkpoint_path != "":
+                state_dict = os.path.join(
+                    args.checkpoint_path
+                )
+            else:
+                state_dict = os.path.join(
+                    "cifar10_models", "state_dicts", args.classifier + ".pt"
+                )
             model.model.load_state_dict(torch.load(state_dict))
             model.model.to("cuda:0")
             
@@ -83,6 +88,7 @@ if __name__ == "__main__":
 
     # TRAINER args
     parser.add_argument("--classifier", type=str, default="resnet18")
+    parser.add_argument("--checkpoint_path", type=str, default="")
     parser.add_argument("--pretrained", type=int, default=0, choices=[0, 1])
 
     parser.add_argument("--precision", type=int, default=32, choices=[16, 32])
